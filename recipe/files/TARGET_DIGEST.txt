@@ -1,0 +1,9 @@
+image_manifest_digest=sha256:530486d8de2f90ce13092e20179ece5530d40185676e18a21410f66bbc1f20b9
+config_digest=sha256:5daaf0eeb713088faf559ee8679ab1efb90ef24b6e9d7270498ee9ae285670fe
+tag=readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5
+probe_port=51820
+probe_path=/
+probe_timeout=180
+probe_exec=wg show interfaces | grep -q .
+verify_cap_add=NET_ADMIN
+verify_device=/dev/net/tun

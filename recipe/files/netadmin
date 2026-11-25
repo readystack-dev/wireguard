@@ -1,0 +1,11 @@
+#!/bin/sh
+# ReadyStack WireGuard: run a command with CAP_NET_ADMIN as the non-root user. The container must be started with
+# --cap-add NET_ADMIN; the capability is then raised as an ambient capability through a copy of util-linux setpriv that
+# carries cap_net_admin as a file capability, so the command and everything it starts (wireguard-go, ip) have it.
+# The image's entrypoint runs through it; use it with docker exec too: `docker exec wireguard netadmin ip route ...`.
+bnd=$(sed -n 's/^CapBnd:[[:space:]]*//p' /proc/self/status)
+if [ $(( 0x$bnd >> 12 & 1 )) -ne 1 ]; then
+  echo "readystack: this container was started without --cap-add NET_ADMIN, which WireGuard needs" >&2
+  exit 1
+fi
+exec /usr/local/libexec/readystack/netadmin-setpriv --inh-caps +net_admin --ambient-caps +net_admin -- "$@"

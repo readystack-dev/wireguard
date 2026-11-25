@@ -1,0 +1,120 @@
+{
+  "schema": "kitforge.build_recipe.v1",
+  "slug": "wireguard",
+  "image": "readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5",
+  "build_method": "source-rebuild-go",
+  "source": {
+    "repo": "https://git.zx2c4.com/wireguard-go",
+    "ref": "0.0.20250522",
+    "commit": "f333402bd9cbe0f3eeb02507bd14e23d7d639280",
+    "builder_image": "golang:1.27.4-bookworm",
+    "go_module_root": "golang.zx2c4.com/wireguard",
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOTOOLCHAIN": "local"
+    },
+    "source_date_epoch": 1794451831,
+    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r5 was cut (2026-11-12T02:50:31Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch).",
+    "_version_note": "0.0.20250522 is wireguard-go's newest tag (git.zx2c4.com, 2026-10-28). go.mod: go 1.23.1; built with the fleet's Go 1.27.3.",
+    "source_date_epoch_basis": "release-cut",
+    "commit_epoch": 1747871102
+  },
+  "binaries_from_source": [
+    {
+      "name": "wireguard-go",
+      "main_pkg": ".",
+      "cgo_enabled": 0,
+      "build_tags": [],
+      "build_flags": [
+        "-trimpath"
+      ],
+      "ldflags": "",
+      "out_path": "/usr/local/bin/wireguard-go",
+      "verify_subcmd": "--version",
+      "verify_contains": "wireguard-go v0.0.20250522"
+    }
+  ],
+  "runtime_packages": [
+    "base-files",
+    "base-passwd",
+    "ca-certificates",
+    "coreutils",
+    "dash",
+    "grep",
+    "iproute2",
+    "iputils-ping",
+    "libacl1",
+    "libbpf1",
+    "libc6",
+    "libcap-ng0",
+    "libcap2",
+    "libcap2-bin",
+    "libcom-err2",
+    "libdb5.3t64",
+    "libelf1t64",
+    "libgssapi-krb5-2",
+    "libidn2-0",
+    "libk5crypto3",
+    "libkeyutils1",
+    "libkrb5-3",
+    "libkrb5support0",
+    "libmnl0",
+    "libpcre2-8-0",
+    "libselinux1",
+    "libsmartcols1",
+    "libssl3t64",
+    "libtirpc-common",
+    "libtirpc3t64",
+    "libunistring5",
+    "libxtables12",
+    "libzstd1",
+    "mawk",
+    "openssl",
+    "sed",
+    "tar",
+    "tzdata",
+    "util-linux",
+    "wireguard-tools",
+    "zlib1g"
+  ],
+  "runtime_base": {
+    "kind": "chisel",
+    "shell": true,
+    "tools": [
+      "grep",
+      "sed",
+      "id",
+      "mktemp",
+      "chmod",
+      "tar"
+    ],
+    "slices": [
+      "wireguard-tools_bins",
+      "iproute2_bins",
+      "util-linux_process",
+      "libcap2-bin_bins",
+      "iputils-ping_bins",
+      "mawk_bins"
+    ],
+    "slice_defs": [
+      "wireguard-tools"
+    ],
+    "provides": [
+      "wg",
+      "ip",
+      "ss",
+      "setpriv",
+      "setcap",
+      "getcap",
+      "ping",
+      "awk",
+      "mawk",
+      "netadmin-setpriv"
+    ],
+    "rootfs_run": [
+      "ln -s mawk \"$ROOT/usr/bin/awk\"",
+      "{ mkdir -p \"$ROOT/usr/local/libexec/readystack\" && cp \"$ROOT/usr/bin/setpriv\" \"$ROOT/usr/local/libexec/readystack/netadmin-setpriv\" && chmod 0755 \"$ROOT/usr/local/libexec/readystack/netadmin-setpriv\" && chroot \"$ROOT\" /usr/sbin/setcap cap_net_admin=+ep /usr/local/libexec/readystack/netadmin-setpriv && chroot \"$ROOT\" /usr/sbin/getcap /usr/local/libexec/readystack/netadmin-setpriv | grep -q 'cap_net_admin=ep'; } || { echo 'could not set up the NET_ADMIN launcher' >&2; exit 1; }"
+    ],
+    "packages": "vendored/chisel/packages.tsv"
+  }
+}

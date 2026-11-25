@@ -1,0 +1,130 @@
+{
+  "apt_refresh": [
+    {
+      "min_version": "2.8.4ubuntu0.1",
+      "package": "apt",
+      "reason": "CVE-2026-109518: apt 2.8.3 -> 2.8.4ubuntu0.1"
+    },
+    {
+      "min_version": "2.8.4ubuntu0.1",
+      "package": "libapt-pkg6.0t64",
+      "reason": "CVE-2026-109518: libapt-pkg6.0t64 2.8.3 -> 2.8.4ubuntu0.1"
+    },
+    {
+      "min_version": "10.42-4ubuntu2.2",
+      "package": "libpcre2-8-0",
+      "reason": "CVE-2026-103111, CVE-2026-86145, CVE-2026-89156, CVE-2026-89157 \u2026: libpcre2-8-0 10.42-4ubuntu2.1 -> 10.42-4ubuntu2.2"
+    }
+  ],
+  "binaries_from_component_images": [],
+  "binaries_from_source": [
+    {
+      "build_flags": [
+        "-trimpath"
+      ],
+      "build_tags": [],
+      "cgo_enabled": 0,
+      "ldflags": "",
+      "main_pkg": ".",
+      "name": "wireguard-go",
+      "out_path": "/usr/local/bin/wireguard-go",
+      "verify_contains": "wireguard-go v0.0.20250522",
+      "verify_subcmd": "--version"
+    }
+  ],
+  "build_method": "source-rebuild-go",
+  "chain_id": 1048,
+  "dep_bumps": [
+    {
+      "module": "golang.org/x/crypto",
+      "to": "v0.57.0",
+      "why": "the fleet's x/crypto floor (wireguard-go 0.0.20250522's go.mod has v0.37.0)"
+    },
+    {
+      "module": "golang.org/x/net",
+      "to": "v0.62.0",
+      "why": "GO-2026-6860, GO-2026-6866: golang.org/x/net v0.60.0 -> 0.62.0 (was v0.60.0)"
+    },
+    {
+      "module": "golang.org/x/sys",
+      "to": "v0.48.0",
+      "why": "the fleet's x/sys floor (go.mod has v0.32.0)"
+    }
+  ],
+  "expected_residuals": [],
+  "images": [
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "builder"
+    },
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "offline_builder"
+    },
+    {
+      "digest": "sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+      "ref": "ubuntu:24.04",
+      "role": "base"
+    }
+  ],
+  "mod_replaces": [],
+  "runtime_base": {
+    "kind": "chisel",
+    "provides": [
+      "wg",
+      "ip",
+      "ss",
+      "setpriv",
+      "setcap",
+      "getcap",
+      "ping",
+      "awk",
+      "mawk",
+      "netadmin-setpriv"
+    ],
+    "rootfs_run": [
+      "ln -s mawk \"$ROOT/usr/bin/awk\"",
+      "{ mkdir -p \"$ROOT/usr/local/libexec/readystack\" && cp \"$ROOT/usr/bin/setpriv\" \"$ROOT/usr/local/libexec/readystack/netadmin-setpriv\" && chmod 0755 \"$ROOT/usr/local/libexec/readystack/netadmin-setpriv\" && chroot \"$ROOT\" /usr/sbin/setcap cap_net_admin=+ep /usr/local/libexec/readystack/netadmin-setpriv && chroot \"$ROOT\" /usr/sbin/getcap /usr/local/libexec/readystack/netadmin-setpriv | grep -q 'cap_net_admin=ep'; } || { echo 'could not set up the NET_ADMIN launcher' >&2; exit 1; }"
+    ],
+    "shell": true,
+    "slice_defs": [
+      "wireguard-tools"
+    ],
+    "slices": [
+      "wireguard-tools_bins",
+      "iproute2_bins",
+      "util-linux_process",
+      "libcap2-bin_bins",
+      "iputils-ping_bins",
+      "mawk_bins"
+    ],
+    "tools": [
+      "grep",
+      "sed",
+      "id",
+      "mktemp",
+      "chmod",
+      "tar"
+    ]
+  },
+  "schema": "kitforge.toolchain_lock.v1",
+  "slug": "wireguard",
+  "source": {
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOTOOLCHAIN": "local"
+    },
+    "builder_image": "golang:1.27.4-bookworm",
+    "commit": "f333402bd9cbe0f3eeb02507bd14e23d7d639280",
+    "commit_epoch": 1747871102,
+    "go_module_root": "golang.zx2c4.com/wireguard",
+    "ref": "0.0.20250522",
+    "repo": "https://git.zx2c4.com/wireguard-go",
+    "source_date_epoch": 1794451831,
+    "source_date_epoch_basis": "release-cut",
+    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r5 was cut (2026-11-12T02:50:31Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch)."
+  },
+  "version": "0.0.20250522"
+}

@@ -1,0 +1,2 @@
+# base images for wireguard (resolve at build_kit)
+golang:1.27.4-bookworm

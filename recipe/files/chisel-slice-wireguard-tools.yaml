@@ -1,0 +1,20 @@
+# ReadyStack slice definition: chisel-releases (ubuntu-24.04) has no slice for wireguard-tools, whose wg the wireguard
+# image runs (wg genkey/pubkey, `wg setconf` and `wg show` over wireguard-go's UAPI socket). Cut from Ubuntu's own
+# wireguard-tools .deb, as every canonical slice is; the format follows chisel-releases' own slices. wg loads libc only;
+# wg-quick (a bash script that needs root) is left out. Contents used of wireguard-tools 1.0.20210914-1ubuntu4 (noble):
+# /usr/bin/wg, /usr/share/doc/wireguard-tools/copyright.
+package: wireguard-tools
+
+essential:
+  - wireguard-tools_copyright
+
+slices:
+  bins:
+    essential:
+      - libc6_libs
+    contents:
+      /usr/bin/wg:
+
+  copyright:
+    contents:
+      /usr/share/doc/wireguard-tools/copyright:

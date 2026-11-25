@@ -1,0 +1,17 @@
+{
+  "schema": "kitforge.custody_inputs.v1",
+  "slug": "wireguard",
+  "repo": "https://git.zx2c4.com/wireguard-go",
+  "ref": "0.0.20250522",
+  "commit": "f333402bd9cbe0f3eeb02507bd14e23d7d639280",
+  "edition": "CE",
+  "ce_audit": {
+    "ce_only": true,
+    "ee_dirs_found": [],
+    "ee_stripped": [],
+    "allowlisted_benign_paths": [],
+    "method": "top-3-level dir scan, .git excluded, precise EE name match, strategy allowlist applied",
+    "note": "EE forks are separate products \u2014 never packaged. CE-only is pillar #1. allowlisted_benign_paths are OSS-repo artifacts named 'enterprise', NOT EE code.",
+    "rechecked_at": "package_archive"
+  }
+}

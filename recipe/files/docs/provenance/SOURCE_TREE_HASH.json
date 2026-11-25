@@ -1,0 +1,9 @@
+{
+  "schema": "kitforge.source_tree_hash.v1",
+  "slug": "wireguard",
+  "repo": "https://git.zx2c4.com/wireguard-go",
+  "ref": "0.0.20250522",
+  "commit": "f333402bd9cbe0f3eeb02507bd14e23d7d639280",
+  "tree_listing_sha256": "2e29cb47cf21a63d63f493a69e65e0a53adc975d58337280681e571fb728dcd3",
+  "file_count": 107
+}
