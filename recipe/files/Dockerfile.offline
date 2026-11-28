@@ -3,7 +3,7 @@
 FROM golang:1.27.4-bookworm@sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea AS build_wireguard-go
 WORKDIR /src
 COPY vendored/wireguard-src/ .
-ENV CGO_ENABLED=0 GOTOOLCHAIN=local GOWORK=off GOFLAGS="-mod=vendor -buildvcs=false" GOPROXY=off SOURCE_DATE_EPOCH=1794451831
+ENV CGO_ENABLED=0 GOTOOLCHAIN=local GOWORK=off GOFLAGS="-mod=vendor -buildvcs=false" GOPROXY=off SOURCE_DATE_EPOCH=1795164637
 RUN go build -trimpath -ldflags='' -o /wireguard-go . && /wireguard-go --version > /tmp/wireguard-go.version 2>&1; cat /tmp/wireguard-go.version; grep -qF 'wireguard-go v0.0.20250522' /tmp/wireguard-go.version || { echo 'wireguard-go --version does not report wireguard-go v0.0.20250522'; exit 1; } && \
     { readelf -lW /wireguard-go | sed -n 's/.*Requesting program interpreter: \(.*\)]$/\1/p'; readelf -dW /wireguard-go | sed -n 's/.*Shared library: \[\(.*\)\]$/\1/p'; } > /wireguard-go.needs
 # rs-probe: the HEALTHCHECK helper (standard library only, from the kit's rs-probe.go)
@@ -11,11 +11,11 @@ FROM golang:1.27.4-bookworm@sha256:4fa7c968ba93f1635670522dbb01a2c78150443e13857
 WORKDIR /probe
 COPY rs-probe.go main.go
 COPY rs-probe.mod go.mod
-ENV CGO_ENABLED=0 GOTOOLCHAIN=local GOFLAGS="-buildvcs=false" GOPROXY=off SOURCE_DATE_EPOCH=1794451831
+ENV CGO_ENABLED=0 GOTOOLCHAIN=local GOFLAGS="-buildvcs=false" GOPROXY=off SOURCE_DATE_EPOCH=1795164637
 RUN go build -trimpath -ldflags='-s -w' -o /rs-probe .
 # the chiselled rootfs (vendored/chisel, cut by Dockerfile.vendor), the service user, the binaries
-FROM ubuntu:24.04@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5 AS rootfs
-ARG SOURCE_DATE_EPOCH=1794451831
+FROM ubuntu:24.04@sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289 AS rootfs
+ARG SOURCE_DATE_EPOCH=1795164637
 ADD vendored/chisel/rootfs.tar /rootfs/
 RUN printf 'wireguard:x:999:999::/var/lib/wireguard:/bin/sh\n' >> /rootfs/etc/passwd && printf 'wireguard:x:999:\n' >> /rootfs/etc/group && \
     mkdir -p /rootfs/var/lib/wireguard /rootfs/config /rootfs/run/wireguard && chown -R 999:999 /rootfs/var/lib/wireguard /rootfs/config /rootfs/run/wireguard
@@ -42,15 +42,20 @@ RUN --mount=type=bind,source=vendored/chisel,target=/chisel set -eu; \
       { echo "/var/lib/dpkg/status does not list every package of vendored/chisel/packages.tsv" >&2; exit 1; }; \
     rm -rf /rootfs/var/log/dpkg.log /rootfs/var/log/alternatives.log /rootfs/var/log/apt /rootfs/var/cache/ldconfig/aux-cache /rootfs/var/cache/fontconfig
 FROM scratch
-ARG SOURCE_DATE_EPOCH=1794451831
+ARG SOURCE_DATE_EPOCH=1795164637
 COPY --from=rootfs /rootfs/ /
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 LABEL org.opencontainers.image.licenses="MIT AND GPL-2.0-only"
 LABEL org.opencontainers.image.title="WireGuard"
-LABEL org.opencontainers.image.source="https://git.zx2c4.com/wireguard-go"
+LABEL org.opencontainers.image.source="https://github.com/readystack-dev/wireguard"
 LABEL org.opencontainers.image.description="WireGuard is the fast, modern, open-source VPN. This image runs a WireGuard interface in userspace (wireguard-go, built from source) with wireguard-tools, as a non-root user that needs only NET_ADMIN and the TUN device: no kernel module, no --privileged."
-LABEL org.opencontainers.image.version="0.0.20250522-CE-ubuntu24.04-r5"
+LABEL org.opencontainers.image.version="0.0.20250522-CE-ubuntu24.04-r6"
 LABEL org.opencontainers.image.revision="f333402bd9cbe0f3eeb02507bd14e23d7d639280"
+LABEL readystack.upstream.source="https://git.zx2c4.com/wireguard-go"
+LABEL org.opencontainers.image.url="https://readystack.dev/products/wireguard"
+LABEL org.opencontainers.image.documentation="https://github.com/readystack-dev/wireguard#readme"
+LABEL org.opencontainers.image.authors="ReadyStack <contact@readystack.dev>"
+LABEL org.opencontainers.image.vendor="ReadyStack.dev"
 HEALTHCHECK --interval=10s --timeout=60s --start-period=10s \
   CMD wg show interfaces | grep -q . || exit 1
 USER wireguard

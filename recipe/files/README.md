@@ -1,14 +1,16 @@
-# Build kit for `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5`
+# Build kit for `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6`
 
-This archive rebuilds the linux/amd64 image `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5` from its own contents, with the network off, and checks the result against the image digest ReadyStack published, `sha256:530486d8de2f90ce13092e20179ece5530d40185676e18a21410f66bbc1f20b9` (also in `TARGET_DIGEST.txt`). It holds everything the build needs, not the image itself.
+This archive rebuilds the linux/amd64 image `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6` from its own contents, with the network off, and checks the result against the image digest ReadyStack published, `sha256:30ed604f9c8dd949def2a1a506cca1d44ab23575d82365c69a39b0eb1cfdb49e` (also in `TARGET_DIGEST.txt`). It holds everything the build needs, not the image itself.
+
+Every release of this kit, its recipe and its defect issues are published at https://github.com/readystack-dev/wireguard; the product page is https://readystack.dev/products/wireguard.
 
 ## Rebuild it
 
 You need linux/amd64 Docker with `buildx` 0.30 or later, `jq` and `tar` (docs/REBUILD.md lists the rest, if any, and the hardware ReadyStack used).
 
 ```
-tar -xpzf ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.tar.gz    # -p keeps each file's mode
-cd 0.0.20250522-CE-ubuntu24.04-r5
+tar -xpzf ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.tar.gz    # -p keeps each file's mode
+cd 0.0.20250522-CE-ubuntu24.04-r6
 ./BUILD_OFFLINE.sh            # builds with the network off, from this archive alone
 ./VERIFY_OFFLINE.sh           # compares the rebuilt digest with the published one, then checks the image
 ```
@@ -23,8 +25,8 @@ ReadyStack signs this archive's `rebuild.json` with its release key once the fin
 
 ```
 curl -fsSLo ../cosign.pub https://readystack.dev/keys/cosign.pub
-curl -fsSLo ../ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.rebuild.json.sigstore https://readystack.dev/api/kit/wireguard/0.0.20250522-CE-ubuntu24.04-r5/files/ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.rebuild.json.sigstore
-python3 docs/rebuild-bundle/rebuild_bundle.py validate . --key ../cosign.pub --signature ../ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.rebuild.json.sigstore
+curl -fsSLo ../ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.rebuild.json.sigstore https://readystack.dev/api/kit/wireguard/0.0.20250522-CE-ubuntu24.04-r6/files/ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.rebuild.json.sigstore
+python3 docs/rebuild-bundle/rebuild_bundle.py validate . --key ../cosign.pub --signature ../ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.rebuild.json.sigstore
 ```
 
 `validate` needs Python 3 and cosign. Without building anything it checks the signature over `rebuild.json`, every file's checksum, the tree hash over every file's path, mode and content, each base image layout's digest and the builder archive. `verify`, with the same arguments, also rebuilds with the builder's network egress blocked and exits 0 only when the rebuilt digest is the published one (docs/REBUILD.md).

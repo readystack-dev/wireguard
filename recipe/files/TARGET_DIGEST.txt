@@ -1,6 +1,6 @@
-image_manifest_digest=sha256:530486d8de2f90ce13092e20179ece5530d40185676e18a21410f66bbc1f20b9
-config_digest=sha256:5daaf0eeb713088faf559ee8679ab1efb90ef24b6e9d7270498ee9ae285670fe
-tag=readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5
+image_manifest_digest=sha256:30ed604f9c8dd949def2a1a506cca1d44ab23575d82365c69a39b0eb1cfdb49e
+config_digest=sha256:5eb16d6a5dff03e4b1a921d392b7a2e7d7214fd2d7fedf82e1aa469a5191ca58
+tag=readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6
 probe_port=51820
 probe_path=/
 probe_timeout=180

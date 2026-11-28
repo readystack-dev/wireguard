@@ -14,6 +14,31 @@
       "min_version": "10.42-4ubuntu2.2",
       "package": "libpcre2-8-0",
       "reason": "CVE-2026-103111, CVE-2026-86145, CVE-2026-89156, CVE-2026-89157 \u2026: libpcre2-8-0 10.42-4ubuntu2.1 -> 10.42-4ubuntu2.2"
+    },
+    {
+      "min_version": "0.190-1.1ubuntu0.2",
+      "package": "libelf1t64",
+      "reason": "USN-9200-1: libelf1t64 0.190-1.1ubuntu0.1 -> 0.190-1.1ubuntu0.2"
+    },
+    {
+      "min_version": "1.20.1-6ubuntu2.12",
+      "package": "libgssapi-krb5-2",
+      "reason": "USN-9202-1: libgssapi-krb5-2 1.20.1-6ubuntu2.10 -> 1.20.1-6ubuntu2.12"
+    },
+    {
+      "min_version": "1.20.1-6ubuntu2.12",
+      "package": "libk5crypto3",
+      "reason": "USN-9202-1: libk5crypto3 1.20.1-6ubuntu2.10 -> 1.20.1-6ubuntu2.12"
+    },
+    {
+      "min_version": "1.20.1-6ubuntu2.12",
+      "package": "libkrb5-3",
+      "reason": "USN-9202-1: libkrb5-3 1.20.1-6ubuntu2.10 -> 1.20.1-6ubuntu2.12"
+    },
+    {
+      "min_version": "1.20.1-6ubuntu2.12",
+      "package": "libkrb5support0",
+      "reason": "USN-9202-1: libkrb5support0 1.20.1-6ubuntu2.10 -> 1.20.1-6ubuntu2.12"
     }
   ],
   "binaries_from_component_images": [],
@@ -33,7 +58,7 @@
     }
   ],
   "build_method": "source-rebuild-go",
-  "chain_id": 1048,
+  "chain_id": 1159,
   "dep_bumps": [
     {
       "module": "golang.org/x/crypto",
@@ -64,7 +89,7 @@
       "role": "offline_builder"
     },
     {
-      "digest": "sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5",
+      "digest": "sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289",
       "ref": "ubuntu:24.04",
       "role": "base"
     }
@@ -122,9 +147,9 @@
     "go_module_root": "golang.zx2c4.com/wireguard",
     "ref": "0.0.20250522",
     "repo": "https://git.zx2c4.com/wireguard-go",
-    "source_date_epoch": 1794451831,
+    "source_date_epoch": 1795164637,
     "source_date_epoch_basis": "release-cut",
-    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r5 was cut (2026-11-12T02:50:31Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch)."
+    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r6 was cut (2026-11-20T08:50:37Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch)."
   },
   "version": "0.0.20250522"
 }

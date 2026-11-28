@@ -6,13 +6,13 @@
 
 # WireGuard: ReadyStack build kit
 
-The offline build kit for the Docker image `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5`. It holds what the image is built from (upstream source, base images, toolchain, pinned dependencies) and the documents, so the image can be rebuilt with no network access (`docker build --network=none`).
+The offline build kit for the Docker image `readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6`. It holds what the image is built from (upstream source, base images, toolchain, pinned dependencies) and the documents, so the image can be rebuilt with no network access (`docker build --network=none`).
 
-- Release: [0.0.20250522-CE-ubuntu24.04-r5](https://github.com/readystack-dev/wireguard/releases/tag/0.0.20250522-CE-ubuntu24.04-r5)
-- Image: [`docker.io/readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5`](https://hub.docker.com/r/readystack/wireguard/tags), manifest digest `sha256:530486d8de2f90ce13092e20179ece5530d40185676e18a21410f66bbc1f20b9`
+- Release: [0.0.20250522-CE-ubuntu24.04-r6](https://github.com/readystack-dev/wireguard/releases/tag/0.0.20250522-CE-ubuntu24.04-r6)
+- Image: [`docker.io/readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6`](https://hub.docker.com/r/readystack/wireguard/tags), manifest digest `sha256:30ed604f9c8dd949def2a1a506cca1d44ab23575d82365c69a39b0eb1cfdb49e`
 - Product page: https://readystack.dev/products/wireguard
 - Source and build recipe: https://readystack.dev/products/wireguard/recipe
-- Build trail: https://readystack.dev/products/wireguard/trail/0.0.20250522-CE-ubuntu24.04-r5
+- Build trail: https://readystack.dev/products/wireguard/trail/0.0.20250522-CE-ubuntu24.04-r6
 - Defects: this repository's Issues (defects recorded from 25 November 2026 on) and https://readystack.dev/defects.html?product=wireguard
 
 ## The image
@@ -31,12 +31,12 @@ From the upstream project's own description: https://www.wireguard.com/, https:/
 
 ## This release
 
-- Docker Scout policy grade at release: **A** (94%), graded 2026-11-12 with `docker scout policy` (CLI 1.26.0, docker-default configuration).
+- Docker Scout policy grade at release: **A** (94%), graded 2026-11-28 with `docker scout policy` (CLI 1.26.0, docker-default configuration).
   - Docker Scout counts 37 packages with copyleft licences (GPL, LGPL, MPL), all of them operating-system packages (it counts only packages whose licence it can read; the SBOM lists every component).
 - Signed with ReadyStack's release key (fingerprint `04daa92344a52dbc`): https://readystack.dev/keys/cosign.pub.
 - Runs as a non-root user (`wireguard`).
 - Attestations on the image: an SPDX SBOM and SLSA provenance v1.
-- Rebuilt from this kit with network egress blocked on 2026-11-12; the rebuilt image digest is the published one.
+- Rebuilt from this kit with network egress blocked on 2026-11-28; the rebuilt image digest is the published one.
 - Base: Ubuntu 24.04.
 
 The current grade, measured again every day, is on https://readystack.dev/products/wireguard.
@@ -45,7 +45,7 @@ WireGuard is distributed under its upstream licence (MIT AND GPL-2.0-only); the 
 
 ## Download
 
-From the [0.0.20250522-CE-ubuntu24.04-r5 release](https://github.com/readystack-dev/wireguard/releases/tag/0.0.20250522-CE-ubuntu24.04-r5): `ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.tar.gz` (444.6 MB), SHA-256 `66c80533739bf6f57bbd2ff8f0c8a433f527ed85960924988ba48593db39418b`.
+From the [0.0.20250522-CE-ubuntu24.04-r6 release](https://github.com/readystack-dev/wireguard/releases/tag/0.0.20250522-CE-ubuntu24.04-r6): `ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.tar.gz` (444.6 MB), SHA-256 `f3b028242eb0f1aaac3d0b8bea4c33574cbe3626d85d2fec3589ec199395d89e`.
 
 ```sh
 sha256sum --check --ignore-missing SHA256SUMS
@@ -57,18 +57,18 @@ The rebuild statement is signed with the ReadyStack release key. Check the signa
 
 ```sh
 cosign verify-blob --key https://readystack.dev/keys/cosign.pub \
-  --bundle ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.rebuild.json.sigstore ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.rebuild.json
+  --bundle ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.rebuild.json.sigstore ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.rebuild.json
 ```
 
 Unpack with `-p` so file modes are kept, then follow the kit's own README.md and docs/REBUILD.md:
 
 ```sh
-tar -xpzf ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.tar.gz
-cd 0.0.20250522-CE-ubuntu24.04-r5
+tar -xpzf ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.tar.gz
+cd 0.0.20250522-CE-ubuntu24.04-r6
 less README.md docs/REBUILD.md
 ```
 
-The build trail (`ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r5.trail.json`, signed the same way, and its Markdown copy) records how this release was built and checked.
+The build trail (`ReadyStack-wireguard-0.0.20250522-CE-ubuntu24.04-r6.trail.json`, signed the same way, and its Markdown copy) records how this release was built and checked.
 
 ## This repository
 

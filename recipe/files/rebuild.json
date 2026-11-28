@@ -6,9 +6,9 @@
       "ref": "golang:1.27.4-bookworm@sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea"
     },
     {
-      "digest": "sha256:77eb101c607d6e3d4f5ad0c8a02c2136c689b98aba1f359e6502ba517e5c57ec",
-      "layout": "bases/ubuntu_24.04_2198e4c65076.oci",
-      "ref": "ubuntu:24.04@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5"
+      "digest": "sha256:9a04f13b3f80ef056361e30868593b1cfd2279fe19e4081cb93a90bf56819d6a",
+      "layout": "bases/ubuntu_24.04_9c7f200c07e3.oci",
+      "ref": "ubuntu:24.04@sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289"
     }
   ],
   "engine": {
@@ -21,8 +21,8 @@
     "context": ".",
     "dockerfile": "Dockerfile.offline.pinned",
     "mtime_policy": "clamp",
-    "source_date_epoch": 1794451831,
-    "tree_hash": "sha256:d8baf923e8cf90841dfe269d7cecc2fd4cb4d31c4870a21fa1e23ffb496d33f1"
+    "source_date_epoch": 1795164637,
+    "tree_hash": "sha256:e6808aa1e9772d96181fdbc9a8b8f19becfe9ef462a90b2f368e7381a2b305aa"
   },
   "probe": {
     "exec": "wg show interfaces | grep -q .",
@@ -31,8 +31,8 @@
   },
   "schema": "readystack-rebuild-bundle/v0.1",
   "subject": {
-    "config_digest": "sha256:5daaf0eeb713088faf559ee8679ab1efb90ef24b6e9d7270498ee9ae285670fe",
-    "image_manifest_digest": "sha256:530486d8de2f90ce13092e20179ece5530d40185676e18a21410f66bbc1f20b9",
-    "name": "docker.io/readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5"
+    "config_digest": "sha256:5eb16d6a5dff03e4b1a921d392b7a2e7d7214fd2d7fedf82e1aa469a5191ca58",
+    "image_manifest_digest": "sha256:30ed604f9c8dd949def2a1a506cca1d44ab23575d82365c69a39b0eb1cfdb49e",
+    "name": "docker.io/readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6"
   }
 }

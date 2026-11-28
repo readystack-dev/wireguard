@@ -1,7 +1,7 @@
 {
   "schema": "kitforge.build_recipe.v1",
   "slug": "wireguard",
-  "image": "readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r5",
+  "image": "readystack/wireguard:0.0.20250522-CE-ubuntu24.04-r6",
   "build_method": "source-rebuild-go",
   "source": {
     "repo": "https://git.zx2c4.com/wireguard-go",
@@ -13,8 +13,8 @@
       "CGO_ENABLED": "0",
       "GOTOOLCHAIN": "local"
     },
-    "source_date_epoch": 1794451831,
-    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r5 was cut (2026-11-12T02:50:31Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch).",
+    "source_date_epoch": 1795164637,
+    "source_date_epoch_provenance": "the time release 0.0.20250522-CE-ubuntu24.04-r6 was cut (2026-11-20T08:50:37Z), by scripts/retarget.py --rev-bump: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit f333402bd9cb, dated 2025-05-21T23:45:02Z (source.commit_epoch).",
     "_version_note": "0.0.20250522 is wireguard-go's newest tag (git.zx2c4.com, 2026-10-28). go.mod: go 1.23.1; built with the fleet's Go 1.27.3.",
     "source_date_epoch_basis": "release-cut",
     "commit_epoch": 1747871102

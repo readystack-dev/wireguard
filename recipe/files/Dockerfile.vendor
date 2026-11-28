@@ -9,7 +9,7 @@ ENV CGO_ENABLED=0 GOTOOLCHAIN=local GOWORK=off
 RUN floor() { e=$(mktemp); cur=$(go list -mod=mod -m -f '{{.Version}}' "$1" 2>"$e") || { grep -q 'not a known dependency' "$e" && return 0; cat "$e" >&2; return 1; }; [ -n "$cur" ] || return 0; [ "$(printf '%s\n%s\n' "$cur" "$2" | sort -V | tail -1)" = "$cur" ] || go mod edit -require="$1@$2"; }; floor golang.org/x/crypto v0.57.0 && floor golang.org/x/net v0.62.0 && floor golang.org/x/sys v0.48.0 && \
     go mod tidy -e && go mod vendor && rm -f go.work go.work.sum && rm -rf .git node_modules
 # chiselled runtime (runtime_base): the files the slices need, cut from Ubuntu's own .debs by Canonical's chisel
-FROM ubuntu:24.04@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5 AS chiselcut
+FROM ubuntu:24.04@sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289 AS chiselcut
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl file zstd && rm -rf /var/lib/apt/lists/*
 RUN curl -fsSL -o /tmp/chisel.tgz https://github.com/canonical/chisel/releases/download/v1.5.1/chisel_v1.5.1_linux_amd64.tar.gz && \
